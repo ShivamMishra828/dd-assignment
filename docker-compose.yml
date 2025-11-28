@@ -30,7 +30,7 @@ services:
         image: shivammishra828/dd-backend:latest
         container_name: backend_container
 
-        # Map backend port 8080 in the container to port 8080 on the host
+        # Map backend port 5000 in the container to port 5000 on the host
         ports:
             - "5000:5000"
 
