@@ -32,7 +32,7 @@ services:
 
         # Map backend port 8080 in the container to port 8080 on the host
         ports:
-            - "8080:8080"
+            - "5000:5000"
 
         # Automatically restart the container on failures
         restart: always
