@@ -15,10 +15,6 @@ services:
         # Automatically restart the container on failures
         restart: always
 
-        # Expose MongoDB port to the host
-        ports:
-            - "27017:27017"
-
         # Initialize MongoDB root username and password
         environment:
             MONGO_INITDB_ROOT_USERNAME: admin
