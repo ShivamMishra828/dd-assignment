@@ -26,14 +26,16 @@ services:
 
     # Backend Node.js API Service
     backend:
-        # Build the backend container from the Dockerfile inside ./backend
-        build:
-            context: ./backend
+        # Use the backend image
+        image: shivammishra828/dd-backend:latest
         container_name: backend_container
 
         # Map backend port 8080 in the container to port 8080 on the host
         ports:
             - "8080:8080"
+
+        # Automatically restart the container on failures
+        restart: always
 
         # Ensure the backend starts only after the database is up
         depends_on:
@@ -41,14 +43,16 @@ services:
 
     # Frontend Angular UI Service
     frontend:
-        # Build the frontend container from the Dockerfile inside ./frontend
-        build:
-            context: ./frontend
+        # Use the frontend image
+        image: shivammishra828/dd-frontend:latest
         container_name: frontend_container
 
         # Map Nginx port 80 to host port 8081
         ports:
             - "8081:80"
+
+        # Automatically restart the container on failures
+        restart: always
 
         # Ensure frontend starts only after backend is ready
         depends_on:
