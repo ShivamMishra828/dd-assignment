@@ -1,0 +1,14 @@
+# Node.js specific
+node_modules/
+npm-debug.log
+.env
+
+# Git specific
+.git/
+.gitignore
+
+# IDE and OS specific
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

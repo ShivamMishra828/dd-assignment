@@ -1,3 +1,3 @@
 module.exports = {
-  url: "mongodb://localhost:27017/dd_db"
+    url: "mongodb://admin:123456@db:27017/dd_db?authSource=admin",
 };

@@ -1,0 +1,59 @@
+# Use Docker Compose version 3.8 syntax
+version: "3.8"
+
+services:
+    # MongoDB Database Service
+    db:
+        # Use official MongoDB 7.0 image
+        image: mongo:7.0
+        container_name: mongodb_container
+
+        # Persist MongoDB data using a named volume
+        volumes:
+            - mongodb_data:/data/db
+
+        # Automatically restart the container on failures
+        restart: always
+
+        # Expose MongoDB port to the host
+        ports:
+            - "27017:27017"
+
+        # Initialize MongoDB root username and password
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: admin
+            MONGO_INITDB_ROOT_PASSWORD: 123456
+
+    # Backend Node.js API Service
+    backend:
+        # Build the backend container from the Dockerfile inside ./backend
+        build:
+            context: ./backend
+        container_name: backend_container
+
+        # Map backend port 8080 in the container to port 8080 on the host
+        ports:
+            - "8080:8080"
+
+        # Ensure the backend starts only after the database is up
+        depends_on:
+            - db
+
+    # Frontend Angular UI Service
+    frontend:
+        # Build the frontend container from the Dockerfile inside ./frontend
+        build:
+            context: ./frontend
+        container_name: frontend_container
+
+        # Map Nginx port 80 to host port 8081
+        ports:
+            - "8081:80"
+
+        # Ensure frontend starts only after backend is ready
+        depends_on:
+            - backend
+
+# Named volume for MongoDB data persistence
+volumes:
+    mongodb_data:
